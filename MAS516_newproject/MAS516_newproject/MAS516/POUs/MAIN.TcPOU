@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{9887cebd-237e-4240-936d-90a74e8a49bb}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	bStatusOk : BOOL;
+	bFault : BOOL := FALSE;
+	eStatus : E_Status := E_Status.Checking;
+	bRunning : BOOL := TRUE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF G_IO.bEmgOk AND NOT(G_IO.bStopButton) AND NOT(G_IO.bOffSwtich) AND NOT(bFault) THEN
+	bStatusOk := TRUE;
+ELSE 
+	bStatusOk := FALSE;
+END_IF
+
+CASE eStatus OF 
+	E_Status.Checking:
+		IF bFault THEN
+			eStatus := E_Status.Fault;
+		END_IF
+		
+		IF bStatusOk THEN	
+			eStatus := E_Status.Ready;
+		END_IF
+		
+		IF NOT(bStatusOk) THEN	
+			eStatus := E_Status.Off;
+		END_IF
+		
+	E_Status.Off:	
+		IF bStatusOk THEN	
+			eStatus := E_Status.Checking;
+		END_IF
+		
+		IF bFault THEN
+			eStatus := E_Status.Fault;
+		END_IF
+
+	E_Status.Fault:
+		IF NOT(bFault) THEN
+			eStatus := E_Status.Checking;
+		END_IF
+	
+	E_Status.Ready:
+		IF G_IO.bStartButton AND bStatusOk AND NOT(bFault) THEN
+			eStatus := E_Status.Starting;
+		END_IF	
+		
+		IF  NOT(bStatusOk) OR bFault THEN
+			eStatus := E_Status.Checking;
+		END_IF	
+
+	E_Status.Starting:
+		IF bRunning THEN
+			eStatus := E_Status.Running;
+		END_IF 
+		
+		IF bFault OR NOT(bStatusOk)  THEN
+			eStatus := E_Status.Checking;
+		END_IF
+		
+	
+	E_Status.Running:
+	
+		IF G_IO.bStopButton THEN
+			eStatus := E_Status.Stopping;
+		END_IF
+		
+		IF NOT(bRunning) OR NOT(bStatusOk) OR bFault THEN
+			eStatus := E_Status.Checking;
+		END_IF
+	
+	E_Status.Stopping:	
+		IF NOT(bRunning) THEN
+			eStatus := E_Status.Checking;
+		END_IF
+	
+		IF NOT(bStatusOk) OR bFault THEN
+		eStatus := E_Status.Checking;
+		END_IF	
+	
+ELSE 	
+	eStatus := E_Status.Checking;
+END_CASE
+
+IF eStatus = E_Status.Running THEN
+	G_IO.bOpenBrakes := TRUE;
+	G_IO.bEnablePCDV := TRUE;
+ELSE
+	G_IO.bOpenBrakes := FALSE;
+	G_IO.bEnablePCDV := FALSE;	
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="93" Count="18" />
+      <LineId Id="162" Count="0" />
+      <LineId Id="164" Count="1" />
+      <LineId Id="163" Count="0" />
+      <LineId Id="112" Count="45" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
