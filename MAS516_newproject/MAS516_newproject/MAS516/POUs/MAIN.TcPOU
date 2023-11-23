@@ -10,7 +10,10 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF G_IO.bEmgOk AND NOT(G_IO.bStopButton) AND NOT(G_IO.bOffSwtich) AND NOT(bFault) THEN
+      <ST><![CDATA[P_Inputs();
+P_Outputs();
+
+IF G_IO.bEmgOk AND NOT(G_IO.bStopButton) AND NOT(G_IO.bOffSwtich) AND NOT(bFault) THEN
 	bStatusOk := TRUE;
 ELSE 
 	bStatusOk := FALSE;
@@ -86,17 +89,14 @@ ELSE
 	eStatus := E_Status.Checking;
 END_CASE
 
-IF eStatus = E_Status.Running THEN
-	G_IO.bOpenBrakes := TRUE;
-	G_IO.bEnablePCDV := TRUE;
-ELSE
-	G_IO.bOpenBrakes := FALSE;
-	G_IO.bEnablePCDV := FALSE;	
-END_IF
+
 
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
+      <LineId Id="189" Count="0" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="190" Count="0" />
       <LineId Id="2" Count="0" />
       <LineId Id="6" Count="0" />
       <LineId Id="9" Count="1" />
@@ -108,15 +108,9 @@ END_IF
       <LineId Id="112" Count="45" />
       <LineId Id="19" Count="0" />
       <LineId Id="12" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="166" Count="0" />
-      <LineId Id="168" Count="0" />
-      <LineId Id="167" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="17" Count="0" />
-      <LineId Id="16" Count="0" />
+      <LineId Id="177" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

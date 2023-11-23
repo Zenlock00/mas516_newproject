@@ -20,7 +20,27 @@
     <Compile Include="DUTs\E_Status.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Function Blocks\FB_AnalogInputScaling.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Function Blocks\FB_Encoder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Function Blocks\FB_JoystickInputScaling.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Function Blocks\FB_ValveOutput.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GVLs\G_IO.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\G_Parameters.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\G_Sensors.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -30,10 +50,46 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\P_Inputs.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\P_Outputs.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Struct\ST_AnalogInput.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Struct\ST_AnalogInputScaling.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Struct\ST_AnalogInputStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Struct\ST_JoystickInputScaling.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Struct\ST_Parameters.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Struct\ST_ValveDeadBand.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Struct\ST_ValveDeadBand_1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Struct\ST_ValveOutput.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Struct\ST_ValveOutput_1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="Function Blocks" />
+    <Folder Include="Enums" />
+    <Folder Include="Struct" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_ValveDeadBand_1" Id="{864b84d3-1dcb-45d5-a2bd-e1bbc1fdf4e0}">
+    <Declaration><![CDATA[TYPE ST_ValveDeadBand_1 :
+STRUCT
+	fPosMax	: LREAL; // Positive min value [19660..29490]
+	fPosMin	: LREAL; // Positive max value [19660..29490]
+	fNegMin : LREAL; // Negative max value [9830..19660]
+	fNegMax	: LREAL; // Negative min value [9830..19660]
+END_STRUCT
+END_TYPE
+
+
+
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

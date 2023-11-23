@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="P_Outputs" Id="{05725e2c-789e-4faf-9ddc-3f7ec72a2093}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_Outputs
+VAR
+	fbWinchValveOutput 		: FB_ValveOutput;
+	fbCylValveOutput 		: FB_ValveOutput;
+	eStatus 				: E_Status; 
+	bEnableWinch 			: BOOL;
+	bEnableCylinder			: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF MAIN.eStatus = E_Status.Running THEN
+	G_IO.bEnablePCDV := TRUE;
+ELSE
+	G_IO.bEnablePCDV := FALSE;	
+END_IF
+
+///////////////////// Winch //////////////////////////////
+IF (MAIN.eStatus = E_Status.Running) AND G_IO.bWinchEnable THEN 
+	G_IO.bOpenBrakes := TRUE;
+	bEnableWinch := TRUE;
+ELSE
+	G_IO.bOpenBrakes := FALSE;
+	bEnableWinch := FALSE;
+END_IF
+
+fbWinchValveOutput(
+	bEnable := bEnableWinch,
+	bDeadBandCompOn := G_Parameters.stParam.bWinchDeadBandCompOn,
+	stValveDeadBand := G_Parameters.stParam.stWinchValveDeadBand,
+	fNormalizedInput := G_Sensors.fJoystickNormalizedY,
+	bEnableValveOutput => G_IO.bWinchValveEnable,
+	nOutput => G_IO.fWinchValveOut
+);
+
+///////////////////// Cylinder //////////////////////////////
+
+IF (MAIN.eStatus = E_Status.Running) AND G_IO.bCylinderEnable THEN 
+	bEnableCylinder := TRUE;
+ELSE
+	bEnableCylinder := FALSE;
+END_IF
+
+fbCylValveOutput(
+	bEnable := bEnableCylinder,
+	bDeadBandCompOn := G_Parameters.stParam.bCylinderDeadBandCompOn,
+	stValveDeadBand := G_Parameters.stParam.stCylValveDeadBand,
+	fNormalizedInput := G_Sensors.fJoystickNormalizedX,
+	bEnableValveOutput => G_IO.bCylinderValveEnable,
+	nOutput => G_IO.fCylValveOut
+);
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_Outputs">
+      <LineId Id="138" Count="0" />
+      <LineId Id="129" Count="1" />
+      <LineId Id="132" Count="1" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="154" Count="5" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="147" Count="0" />
+      <LineId Id="149" Count="1" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="146" Count="0" />
+      <LineId Id="18" Count="2" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="83" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

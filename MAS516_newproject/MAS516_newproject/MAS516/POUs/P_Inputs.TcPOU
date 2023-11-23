@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="P_Inputs" Id="{8b676dbd-393f-42d6-8803-330b6e90ab14}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_Inputs
+VAR
+	fbJoystickWinch 				: FB_JoystickInputScaling;
+	fbJoystickCyl 					: FB_JoystickInputScaling;
+	fbJoystickRot 					: FB_JoystickInputScaling;
+	fbWinchPosition 				: FB_Encoder;
+	fbCylinderPosition 				: FB_Encoder;
+	fbCylPistonPosition 			: FB_AnalogInputScaling;
+	fbPressureSupply 				: FB_AnalogInputScaling;
+	fbPressureReturn 				: FB_AnalogInputScaling;
+	fbPressureCyl_A_PistonSide 		: FB_AnalogInputScaling;
+	fbPressureCyl_B_RodSide			: FB_AnalogInputScaling;
+	fbPressureWinch_A1_Input 		: FB_AnalogInputScaling;
+	fbPressureWinch_A2_Input 		: FB_AnalogInputScaling;
+	fbPressureWinch_B_Output		: FB_AnalogInputScaling;
+	eStatus : E_Status;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbJoystickWinch(
+	bEnable := G_IO.bManualSwtich,
+	nRawInput := G_IO.fJoyYraw,
+	stJoystickInputScaling := G_Parameters.stParam.stJoystickInputScalingY,
+	fNormalizedOutput => G_Sensors.fJoystickNormalizedY
+);
+
+fbJoystickCyl(
+	bEnable := G_IO.bManualSwtich,
+	nRawInput := G_IO.fJoyXraw,
+	stJoystickInputScaling := G_Parameters.stParam.stJoystickInputScalingX,
+	fNormalizedOutput => G_Sensors.fJoystickNormalizedX
+);
+
+fbJoystickRot(
+	bEnable := G_IO.bManualSwtich,
+	nRawInput := G_IO.fJoyZraw,
+	stJoystickInputScaling := G_Parameters.stParam.stJoystickInputScalingZ,
+	fNormalizedOutput => G_Sensors.fJoystickNormalizedZ
+);
+
+fbWinchPosition (
+	nRawInput := G_IO.nWinchEncoderValue, 
+	fEncoderOffset := G_Parameters.stParam.fWinchEncoderOffset,
+	fPosition => G_Sensors.fWinchEncoderPosition
+);
+
+fbCylinderPosition (
+	nRawInput := G_IO.nCylinderEncoderValue, 
+	fEncoderOffset := G_Parameters.stParam.fCylinderEncoderOffset,
+	fPosition => G_Sensors.fCylinderEncoderPosition
+);
+
+//G_Sensors.fWinchWirePosition := fbWinchPosition.fPosition*G_Parameters.stParam.fWinchDrumScaling;
+G_Sensors.fCylinderPosition := -(fbCylinderPosition.fPosition/360)*G_Parameters.stParam.fCylinderDrawWireGearRadius*0.001;
+
+
+fbPressureSupply(
+	nRawInput := G_IO.fPressureSupply,
+	stAnalogInputScaling := G_Parameters.stParam.stPressureSensorScaling400bar,
+	fOutput => G_Sensors.fPressureSupply
+);
+
+fbPressureReturn(
+	nRawInput := G_IO.fPressureReturn,
+	stAnalogInputScaling := G_Parameters.stParam.stPressureSensorScaling40bar,
+	fOutput => G_Sensors.fPressureReturn
+);
+
+fbPressureCyl_A_PistonSide(
+	nRawInput := G_IO.fPressureCylinderA,
+	stAnalogInputScaling := G_Parameters.stParam.stPressureSensorScaling400bar,
+	fOutput => G_Sensors.fPressureCylinderA
+);
+
+fbPressureCyl_B_RodSide(
+	nRawInput := G_IO.fPressureCylinderB,
+	stAnalogInputScaling := G_Parameters.stParam.stPressureSensorScaling400bar,
+	fOutput => G_Sensors.fPressureCylinderB
+);
+
+fbPressureWinch_A1_Input(
+	nRawInput := G_IO.fPressureWinchA1,
+	stAnalogInputScaling := G_Parameters.stParam.stPressureSensorScaling400bar,
+	fOutput => G_Sensors.fPressureWinchA1
+);
+
+fbPressureWinch_A2_Input(
+	nRawInput := G_IO.fPressureWinchA2,
+	stAnalogInputScaling := G_Parameters.stParam.stPressureSensorScaling400bar,
+	fOutput => G_Sensors.fPressureWinchA2
+);
+
+fbPressureWinch_B_Output(
+	nRawInput := G_IO.fPressureWinchB,
+	stAnalogInputScaling := G_Parameters.stParam.stPressureSensorScaling400bar,
+	fOutput => G_Sensors.fPressureWinchB
+);
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_Inputs">
+      <LineId Id="5" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="173" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="128" Count="3" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="260" Count="5" />
+      <LineId Id="259" Count="0" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="257" Count="0" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="252" Count="2" />
+      <LineId Id="256" Count="0" />
+      <LineId Id="255" Count="0" />
+      <LineId Id="251" Count="0" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="266" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="40" Count="1" />
+      <LineId Id="164" Count="0" />
+      <LineId Id="42" Count="1" />
+      <LineId Id="45" Count="2" />
+      <LineId Id="165" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="50" Count="2" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="60" Count="2" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="105" Count="2" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="108" Count="4" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="113" Count="4" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="118" Count="1" />
+      <LineId Id="38" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

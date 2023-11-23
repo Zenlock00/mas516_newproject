@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_Parameters" Id="{a43a257d-4d38-4d6a-971b-afd17eab7788}">
+    <Declaration><![CDATA[TYPE ST_Parameters :
+STRUCT
+	fCyclicTime 					: LREAL := 0.001; // [s]
+	fMaxCylVelocityLimit 			: LREAL := 0.005; // [m/s]
+	fMaxWinchVelocityLimit 			: LREAL := 0.005; // [rad/s]
+	bWinchDeadBandCompOn 			: BOOL := TRUE;
+	bCylinderDeadBandCompOn 		: BOOL := TRUE;
+	stWinchValveDeadBand 			: ST_ValveDeadBand := (fPosMax := 10000.0, fPosMin := 2000.0, fNegMin := 1500.0, fNegMax := 10000.0);
+	stCylValveDeadBand 				: ST_ValveDeadBand := (fPosMax := 10000.0, fPosMin := 2000.0, fNegMin := 2000.0, fNegMax := 7000.0);
+	stPressureSensorScaling400bar 	: ST_AnalogInputScaling := (fMaxInputValue := 32767.0, fMinInputValue := 0.0, fMaxOutputValue := 400.0, fMinOutputValue := 0.0);
+	stPressureSensorScaling40bar 	: ST_AnalogInputScaling := (fMaxInputValue := 32767.0, fMinInputValue := 0.0, fMaxOutputValue := 40.0, fMinOutputValue := 0.0);
+	stJoystickInputScalingX 		: ST_JoystickInputScaling := (fMaxInputValue := 14790.0, fMinInputValue := 1797.0, fNeutralInputValue := 8400, fNeutralDeadband := 50.0, fMaxOutputValue := 1.0, fMinOutputValue := -1.0, fNeutralOutputValue := 0.0);
+	stJoystickInputScalingY 		: ST_JoystickInputScaling := (fMaxInputValue := 14770.0, fMinInputValue := 1829.0, fNeutralInputValue := 8340, fNeutralDeadband := 50.0, fMaxOutputValue := 1.0, fMinOutputValue := -1.0, fNeutralOutputValue := 0.0);
+	stJoystickInputScalingZ 		: ST_JoystickInputScaling := (fMaxInputValue := 14830.0, fMinInputValue := 1804.0, fNeutralInputValue := 8380, fNeutralDeadband := 50.0, fMaxOutputValue := 1.0, fMinOutputValue := -1.0, fNeutralOutputValue := 0.0);
+	stCylPistonPositionScaling 		: ST_AnalogInputScaling := (fMaxInputValue := 32295.0, fMinInputValue := 229.0, fMaxOutputValue := 0.5, fMinOutputValue := 0.0);
+	fWinchEncoderOffset 			: LREAL := 0.0; // Encoder value at zero (Cylinder out / second layaer)
+	fCylinderEncoderOffset 			: LREAL := 1373.51522; // Encoder value at zero (Cylinder out / second layaer)
+	fCylinderDrawWireGearRadius 	: LREAL := 315.23;  // mm/rev
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
