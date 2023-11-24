@@ -56,13 +56,7 @@
     <Compile Include="POUs\P_Outputs.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Struct\ST_AnalogInput.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Struct\ST_AnalogInputScaling.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Struct\ST_AnalogInputStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Struct\ST_JoystickInputScaling.TcDUT">
@@ -78,9 +72,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Struct\ST_ValveOutput.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Struct\ST_ValveOutput_1.TcDUT">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -56,7 +56,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{CCD62B6E-91A9-4EE1-BE4A-2C5BBAFD4EEA}" Name="MAS516" PrjFilePath="MAS516\MAS516.plcproj" TmcFilePath="MAS516\MAS516.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAS516\MAS516.tmc" TmcHash="{89F96911-8DE2-1985-5367-DB2BEEA27830}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAS516\MAS516.tmc" TmcHash="{B8F6F29A-9461-ABD1-E951-F97E557CAB64}">
 					<Name>MAS516 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -116,14 +116,6 @@
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>G_IO.nWinchEncoderValue</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
-							<Name>G_IO.nCylinderEncoderValue</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
 							<Name>G_IO.fPressureWinchA1</Name>
 							<Type>INT</Type>
 						</Var>
@@ -151,6 +143,14 @@
 							<Name>G_IO.fPressureReturn</Name>
 							<Type>INT</Type>
 						</Var>
+						<Var>
+							<Name>G_IO.nWinchEncoderValue</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>G_IO.nCylinderEncoderValue</Name>
+							<Type>UDINT</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
@@ -172,16 +172,16 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>G_IO.fWinchPDCVOut</Name>
+							<Comment><![CDATA[ Analog Outputs]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
 							<Name>G_IO.fWinchValveOut</Name>
 							<Type>INT</Type>
 						</Var>
 						<Var>
 							<Name>G_IO.fCylValveOut</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_IO.fWinchPDCVOut</Name>
-							<Comment><![CDATA[ Analog Outputs]]></Comment>
 							<Type>INT</Type>
 						</Var>
 					</Vars>
@@ -994,37 +994,45 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							<CoeProfile ProfileNo="19665801"/>
 						</EtherCAT>
 					</Box>
-					<Box Id="13" BoxType="9099" BoxFlags="#x00000020">
-						<Name>Term 13 (EL4032)</Name>
+					<Box Id="7" BoxType="9099">
+						<Name>Term 7 (EL4034)</Name>
 						<ImageId>1002</ImageId>
-						<EtherCAT SlaveType="2" PdiType="#x0405" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0fc03052" RevisionNo="#x00140000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL4032 2Ch. Ana. Output +/-10V, 12bit" Desc="EL4032" PortABoxInfo="#x0100000c">
-							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
-							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
-							<SyncMan>001104002400010003000000000000000400001124010000</SyncMan>
+						<EtherCAT SlaveType="2" PdiType="#x0405" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0fc23052" RevisionNo="#x00150000" InfoDataAddr="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL4034 4K. Ana. Ausgang +/-10V, 12bit" Desc="EL4034" PortABoxInfo="#x0100000c">
+							<SyncMan>001080002600010001000000000000008000001026010000</SyncMan>
+							<SyncMan>801080002200010002000000000000008000801022010000</SyncMan>
+							<SyncMan>001108002400010003000000000000000800001124010000</SyncMan>
 							<SyncMan>801100000000000004000000000000000000801100000000</SyncMan>
 							<Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
 							<BootStrapData>0010f400f410f400</BootStrapData>
-							<DcMode>53796e6368726f6e0000000000000000534d2d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e0000000000000000000000000000000000000000000000000000000000a0860100000000070100000000000000000000000000000000000000000000000000000000000000</DcMode>
+							<DcMode>53796e6368726f6e000000000000000053796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
+							<DcMode>4443000000000000000000000000000044430000000000000000000000000000000000000000000000000000000000000000000000000000a0860100000000070100000000000000000000000000000000000000000000000000000000000000</DcMode>
 							<Pdo Name="AO Outputs Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="2">
-								<Entry Name="Analog output" Index="#x7000" Sub="#x11" Flags="#x00010000">
+								<Entry Name="Analog output" Index="#x7000" Sub="#x11">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="AO Outputs Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="2">
-								<Entry Name="Analog output" Index="#x7010" Sub="#x11" Flags="#x00010000">
+								<Entry Name="Analog output" Index="#x7010" Sub="#x11">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
-							<CoeProfile ProfileNo="26219401"/>
-							<CoeProfile ProfileNo="26219401"/>
+							<Pdo Name="AO Outputs Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry Name="Analog output" Index="#x7020" Sub="#x11">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="AO Outputs Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="2">
+								<Entry Name="Analog output" Index="#x7030" Sub="#x11">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
 						</EtherCAT>
 					</Box>
 					<Box Id="14" BoxType="9094" BoxFlags="#x00000020">
 						<Name>Term 14 (EL6751)</Name>
 						<ImageId>1003</ImageId>
-						<EtherCAT SlaveType="5" AdsServerAddress="c0a8000a030f0000" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x1a5f3052" RevisionNo="#x00160000" InfoDataAddr="true" InfoDataNetId="true" TimeoutStateChange1="5000" TimeoutStateChange3="10000" TimeoutStateChange4="1000" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" PortPhys="51" MaxSlotCount="126" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6751 CANopen Master" Desc="EL6751" PortABoxInfo="#x0100000d">
+						<EtherCAT SlaveType="5" AdsServerAddress="c0a8000a030f0000" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" FoeType="1" VendorId="#x00000002" ProductCode="#x1a5f3052" RevisionNo="#x00160000" InfoDataAddr="true" InfoDataNetId="true" TimeoutStateChange1="5000" TimeoutStateChange3="10000" TimeoutStateChange4="1000" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" PortPhys="51" MaxSlotCount="126" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6751 CANopen Master" Desc="EL6751" PortABoxInfo="#x01000007">
 							<SyncMan>001000042600010001000000500000040004001026010000</SyncMan>
 							<SyncMan>001400042200010002000000500000040004001422010000</SyncMan>
 							<SyncMan>001800002600000003000000000000000000001826010000</SyncMan>
@@ -1336,9 +1344,10 @@ Slave-Mode:
 				<Link VarA="PlcTask Inputs^G_IO.fPressureSupply" VarB="AI Standard Channel 2^Value"/>
 				<Link VarA="PlcTask Inputs^G_IO.fPressureWinchA1" VarB="AI Standard Channel 1^Value"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 9 (EK1818)^Term 13 (EL4032)">
-				<Link VarA="PlcTask Outputs^G_IO.fCylValveOut" VarB="AO Outputs Channel 2^Analog output"/>
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 9 (EK1818)^Term 7 (EL4034)">
+				<Link VarA="PlcTask Outputs^G_IO.fCylValveOut" VarB="AO Outputs Channel 3^Analog output"/>
 				<Link VarA="PlcTask Outputs^G_IO.fWinchPDCVOut" VarB="AO Outputs Channel 1^Analog output"/>
+				<Link VarA="PlcTask Outputs^G_IO.fWinchValveOut" VarB="AO Outputs Channel 2^Analog output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^WinchEncoder (Fraba EtherCAT)">
 				<Link VarA="PlcTask Inputs^G_IO.nWinchEncoderValue" VarB="Encoder^Position Value"/>

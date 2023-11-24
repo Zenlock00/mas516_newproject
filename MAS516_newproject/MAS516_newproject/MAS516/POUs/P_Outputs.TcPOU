@@ -8,13 +8,19 @@ VAR
 	eStatus 				: E_Status; 
 	bEnableWinch 			: BOOL;
 	bEnableCylinder			: BOOL;
+	bTest1 : BOOL;
+	bTest2 : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF MAIN.eStatus = E_Status.Running THEN
 	G_IO.bEnablePCDV := TRUE;
+	G_IO.bWinchValveEnable := TRUE;
+	G_IO.bCylinderValveEnable := TRUE;
 ELSE
 	G_IO.bEnablePCDV := FALSE;	
+	G_IO.bWinchValveEnable := FALSE;
+	G_IO.bCylinderValveEnable := FALSE;
 END_IF
 
 ///////////////////// Winch //////////////////////////////
@@ -31,7 +37,7 @@ fbWinchValveOutput(
 	bDeadBandCompOn := G_Parameters.stParam.bWinchDeadBandCompOn,
 	stValveDeadBand := G_Parameters.stParam.stWinchValveDeadBand,
 	fNormalizedInput := G_Sensors.fJoystickNormalizedY,
-	bEnableValveOutput => G_IO.bWinchValveEnable,
+	bEnableValveOutput => bTest1,
 	nOutput => G_IO.fWinchValveOut
 );
 
@@ -48,7 +54,7 @@ fbCylValveOutput(
 	bDeadBandCompOn := G_Parameters.stParam.bCylinderDeadBandCompOn,
 	stValveDeadBand := G_Parameters.stParam.stCylValveDeadBand,
 	fNormalizedInput := G_Sensors.fJoystickNormalizedX,
-	bEnableValveOutput => G_IO.bCylinderValveEnable,
+	bEnableValveOutput => bTest2,
 	nOutput => G_IO.fCylValveOut
 );
 
@@ -56,8 +62,13 @@ fbCylValveOutput(
     </Implementation>
     <LineIds Name="P_Outputs">
       <LineId Id="138" Count="0" />
-      <LineId Id="129" Count="1" />
-      <LineId Id="132" Count="1" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="172" Count="0" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="173" Count="1" />
+      <LineId Id="133" Count="0" />
       <LineId Id="126" Count="0" />
       <LineId Id="89" Count="0" />
       <LineId Id="154" Count="5" />
