@@ -48,24 +48,5 @@ END_IF
 
 ]]></ST>
     </Implementation>
-    <LineIds Name="FB_ValveOutput">
-      <LineId Id="46" Count="0" />
-      <LineId Id="89" Count="0" />
-      <LineId Id="49" Count="0" />
-      <LineId Id="51" Count="3" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="91" Count="0" />
-      <LineId Id="93" Count="5" />
-      <LineId Id="92" Count="0" />
-      <LineId Id="90" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="74" Count="1" />
-      <LineId Id="73" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="41" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

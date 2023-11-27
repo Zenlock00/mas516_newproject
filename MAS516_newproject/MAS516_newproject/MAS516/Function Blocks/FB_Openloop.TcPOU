@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_Openloop" Id="{63d61a11-9163-4ac0-bf28-ea5568a5ce91}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Openloop
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	U : LREAL;  //Discharge Area - Valve
+	ValveOutput : LREAL; 
+END_VAR
+VAR
+	BoreArea : LREAL := 0.0031172426775;
+	AnnulusArea : LREAL := 0.0018606066775;
+	MaxFlow : LREAL := 25;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF ((* G_Parameters.stParam.bEnableCylinder := TRUE AND *) G_Parameters.stParam.V_ref > 0) THEN
+	U := (60000 * G_Parameters.stParam.V_ref * BoreArea) / MaxFlow;
+	
+ELSIF ((*G_Parameters.stParam.bEnableCylinder := TRUE AND *)G_Parameters.stParam.V_ref < 0) THEN
+	U := (60000 * G_Parameters.stParam.V_ref * AnnulusArea) / MaxFlow;
+	
+ELSE 
+	U := 0;
+END_IF
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

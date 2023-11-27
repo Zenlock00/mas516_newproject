@@ -19,6 +19,10 @@ STRUCT
 	fWinchEncoderOffset 			: LREAL := 0.0; // Encoder value at zero (Cylinder out / second layaer)
 	fCylinderEncoderOffset 			: LREAL := 1373.51522; // Encoder value at zero (Cylinder out / second layaer)
 	fCylinderDrawWireGearRadius 	: LREAL := 315.23;  // mm/rev
+	bEnableWinch 					: BOOL;
+	bEnableCylinder					: BOOL;
+	V_ref 							: LREAL;  //Velocity Reference
+	U   							: LREAL;  //Discharge Area
 END_STRUCT
 END_TYPE
 ]]></Declaration>

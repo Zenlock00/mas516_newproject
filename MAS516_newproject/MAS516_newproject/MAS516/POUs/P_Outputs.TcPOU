@@ -5,11 +5,12 @@
 VAR
 	fbWinchValveOutput 		: FB_ValveOutput;
 	fbCylValveOutput 		: FB_ValveOutput;
+	fbOpenloop				: FB_Openloop;
 	eStatus 				: E_Status; 
 	bEnableWinch 			: BOOL;
-	bEnableCylinder			: BOOL;
 	bTest1 : BOOL;
 	bTest2 : BOOL;
+	ValveOpening 			: LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -43,20 +44,22 @@ fbWinchValveOutput(
 ///////////////////// Cylinder //////////////////////////////
 
 IF (MAIN.eStatus = E_Status.Running) AND G_IO.bCylinderEnable THEN 
-	bEnableCylinder := TRUE;
+	G_Parameters.stParam.bEnableCylinder := TRUE;
 ELSE
-	bEnableCylinder := FALSE;
+	G_Parameters.stParam.bEnableCylinder := FALSE;
 END_IF
 
 fbCylValveOutput(
-	bEnable := bEnableCylinder,
+	bEnable := G_Parameters.stParam.bEnableCylinder,
 	bDeadBandCompOn := G_Parameters.stParam.bCylinderDeadBandCompOn,
 	stValveDeadBand := G_Parameters.stParam.stCylValveDeadBand,
 	fNormalizedInput := G_Sensors.fJoystickNormalizedX,
 	nOutput => G_IO.fCylValveOut
 );
 
-]]></ST>
+fbOpenloop(
+	U => G_Parameters.stParam.U
+);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
